@@ -3,7 +3,7 @@
 ::  DEFINE SYSTEM ENVIRONMENT
 	@echo off
 	setlocal enabledelayedexpansion
-	set SCRIPT_VERSION=4.0.1.0
+	set SCRIPT_VERSION=4.0.1.1
 	Title  ------- GEEKS ON SITE ------ Version %SCRIPT_VERSION%
 	mode con: cols=46 lines=2
 	color 9F&prompt $v
@@ -1051,7 +1051,11 @@
 	echo.
 	if "%Jobs%"=="YES" mode con: cols=50 lines=3
 	echo Next Job is HitmanPro
-	start "c:\gos\3 Rkill.exe"
+	if exist "c:\gos\3 Rkill.exe" start "" "c:\gos\3 Rkill.exe"
+	if exist "c:\gos\3 Rkill.exe" goto Rkill_started	
+	if exist "c:\gos\3 - Rkill.exe" start "" "c:\gos\3 - Rkill.exe"
+	if exist "c:\gos\3 - Rkill.exe" goto Rkill_started	
+: Rkill_started	
 	if "%Jobs%"=="No" goto GOS_Tools
 	timeout /T 10
 : HitmanPro
@@ -1060,7 +1064,7 @@
 	if "%Jobs%"=="YES" mode con: cols=50 lines=3
 	if "%Job%"=="FFTU" echo Next Tool is Malwarebytes
 	if "%Job%"=="MTU"  echo Next Tool is CCleaner
-	start "" c:\gos\HitmanPro.exe /scan /noinstall
+	if exist "c:\gos\HitmanPro.exe" start "" c:\gos\HitmanPro.exe /scan /noinstall
 	if "%Jobs%"=="No" goto GOS_Tools
 	if "%Job%"=="FFTU" echo Press Enter To Start Malwarebytes
 	if "%Job%"=="MTU"  echo Press Enter To Start CCleaner
@@ -1081,8 +1085,8 @@
 	if exist "%PROGRAMFILES(X86)%\Malwarebytes Anti-Malware\mbam.exe" goto MBAM_Started
 : Install_MBAM
 	echo Installing Malwarebytes Please Wait
-	if not exist c:\gos\mbam.exe echo MBAM is not in the GOS Folder
-	if not exist c:\gos\mbam.exe pause & goto GOS_Tools
+	if not exist "c:\gos\mbam.exe" echo MBAM is not in the GOS Folder
+	if not exist "c:\gos\mbam.exe" pause & goto GOS_Tools
 	start /wait c:\gos\MBAM.exe /verysilent
 : Finding_MBAM
 	echo.
@@ -1105,7 +1109,7 @@
 	echo.
 	if "%Jobs%"=="YES" mode con: cols=50 lines=3
 	if "%Jobs%"=="YES"  echo Next Tool is Iobit Uninstaller
-	start c:\gos\CCleaner.exe
+	if exist "c:\gos\CCleaner.exe" start "" "c:\gos\CCleaner.exe"
 	if "%Jobs%"=="No" goto GOS_Tools
 	echo Press Enter to start Iobit Uninstaller
 	pause >nul
@@ -1115,7 +1119,7 @@
 	if "%Jobs%"=="YES" mode con: cols=50 lines=3
 	if "%Job%"=="FFTU" echo Next Tool is Autoruns
 	if "%Job%"=="MTU"  echo Next Tool is PatchMyPC
-	start c:\gos\Iobituninstaller.exe
+	if exist "c:\gos\Iobituninstaller.exe" start "" "c:\gos\Iobituninstaller.exe"
 	if "%Jobs%"=="No" goto GOS_Tools
 	if "%Job%"=="FFTU" echo Press Enter to start Autoruns
 	if "%Job%"=="MTU"  echo Press Enter to start PatchMyPC
@@ -1126,7 +1130,7 @@
 	echo.
 	if "%Jobs%"=="YES" mode con: cols=50 lines=3
 	if "%Jobs%"=="YES"  echo Next Tool is PatchMyPC
-	start c:\gos\Autoruns.exe
+	if exist "c:\gos\Autoruns.exe" start "" "c:\gos\Autoruns.exe""
 	if "%Jobs%"=="No" goto GOS_Tools
 	echo Press Enter to start PatchMyPC
 	pause >nul
@@ -1142,7 +1146,7 @@
 	if "%SAFE_MODE%"=="yes" echo Press Enter to Start Auto Repair
 	if "%SAFE_MODE%"=="yes" pause >nul
 	if "%SAFE_MODE%"=="yes" goto Auto_Repair
-	start c:\gos\PatchMyPC.exe
+	if exist "c:\gos\PatchMyPC.exe" start "" "c:\gos\PatchMyPC.exe"
 	if "%Jobs%"=="No" goto GOS_Tools
 : Auto_Repair
 	mode con: cols=86 lines=38
@@ -1770,7 +1774,7 @@ REM SYSTEM WIDE
 	echo         					 Author  :  John Clippinger   
 	echo        						 E-Mail  :  jclippinger@geeksonsite.com  
 	echo         					 Website :  www.geeksonsite.com 
-	echo         					 Created :  08/16/2017
+	echo         					 Created :  07/20/2018
 	echo        						 Version :  %SCRIPT_VERSION%
 	echo.
 	echo License key: %random% %random% %random% %random% %random% 
