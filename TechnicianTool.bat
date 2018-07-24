@@ -3,7 +3,7 @@
 ::  DEFINE SYSTEM ENVIRONMENT
 	@echo off
 	setlocal enabledelayedexpansion
-	set SCRIPT_VERSION=4.0.1.1
+	set SCRIPT_VERSION=4.0.1.2
 	Title  ------- GEEKS ON SITE ------ Version %SCRIPT_VERSION%
 	mode con: cols=46 lines=2
 	color 9F&prompt $v
@@ -1051,11 +1051,7 @@
 	echo.
 	if "%Jobs%"=="YES" mode con: cols=50 lines=3
 	echo Next Job is HitmanPro
-	if exist "c:\gos\3 Rkill.exe" start "" "c:\gos\3 Rkill.exe"
-	if exist "c:\gos\3 Rkill.exe" goto Rkill_started	
-	if exist "c:\gos\3 - Rkill.exe" start "" "c:\gos\3 - Rkill.exe"
-	if exist "c:\gos\3 - Rkill.exe" goto Rkill_started	
-: Rkill_started	
+	START CMD /C "c:\gos\3  Rkill.exe"
 	if "%Jobs%"=="No" goto GOS_Tools
 	timeout /T 10
 : HitmanPro
@@ -1774,7 +1770,7 @@ REM SYSTEM WIDE
 	echo         					 Author  :  John Clippinger   
 	echo        						 E-Mail  :  jclippinger@geeksonsite.com  
 	echo         					 Website :  www.geeksonsite.com 
-	echo         					 Created :  07/20/2018
+	echo         					 Created :  07/22/2018
 	echo        						 Version :  %SCRIPT_VERSION%
 	echo.
 	echo License key: %random% %random% %random% %random% %random% 
@@ -1784,6 +1780,5 @@ REM SYSTEM WIDE
 ::===============================================================================================================
 :================================================================================================================
 
-	
 	
 	

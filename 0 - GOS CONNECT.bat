@@ -1,15 +1,9 @@
 ::           Author  :  John Clippinger   
 ::           E-Mail  :  jclippinger@geeksonsite.com  
 ::           website :  www.geeksonsite.com      
-::           Updated :  8/07/2015
-::           Creation Date : 8/25/2014  
+::           Updated :  7/22/2018
 ::           File    :  GOS Connect Tool   
-::           Version :  1.0.0.6 Added the Option to Open Edge on Windows 10, Added Number order to Commands
-
-:: Change Log
-:: 1.0.0.5 Made corrections for Windows 10 
-:: 1.0.0.4 Removed systeminfo to speed up load time, Added message when activating admin account 
-:: 1.0.0.3 Bug fix for system restore when in safe mode
+::           Version :  1.0.0.8
 
 @echo off
 Setlocal
@@ -59,12 +53,12 @@ echo 	  บ                                                                บ
 echo 	  บ  1. Geeks On Site Website                                      บ
 echo 	  บ  2. Ping Test                                                  บ
 echo 	  บ  3. System Restore                                             บ
-echo 	  บ  4. Safe Mode with Networking ----------(Auto Reboot)          บ
+echo 	  บ  4. Safe Mode with Networking -------------------(Auto Reboot) บ
 echo 	  บ  5. Disable Windows Fire Wall                                  บ
-echo 	  บ  6. Microsoft System Configuration -----(MSCONFIG)             บ
-echo 	  บ  7. Turn off User Account Controls -----(Reboot if Vista OS)   บ
+echo 	  บ  6. Microsoft System Configuration -----------------(MSCONFIG) บ
+echo 	  บ  7. Turn off User Account Controls -------(Reboot if Vista OS) บ
 echo 	  บ  8. Activate Admin Account                                     บ
-echo 	  บ  9. Repair Network ---------------------(Auto Reboot)          บ
+echo 	  บ  9. Repair Network ------------------------------(Auto Reboot) บ
 echo 	  บ                                                                บ
 echo 	  บ                                                                บ
 Echo 	  ศออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออผ
@@ -199,7 +193,7 @@ goto top
 
 :: 6
 : MSCONFIG
-MSCONFIG
+start MSCONFIG
 cls
 goto top
 
@@ -207,7 +201,11 @@ goto top
 
 :: 7
 : UAC OFF
+for /f "delims=" %%I in ('ver') do set "ver=%%I"
+if "%ver%" neq "%ver:Version 5.=%" goto UAC None
 C:\Windows\System32\cmd.exe /c %windir%\System32\reg.exe ADD  HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v  EnableLUA /t REG_DWORD /d 0 /f 
+: UAC None
+if "%ver%" neq "%ver:Version 5.=%" echo Operation Completed
 Pause
 cls
 goto top
@@ -216,6 +214,15 @@ goto top
 
 : 8
 :Admin Activate
+for /f "delims=" %%I in ('ver') do set "ver=%%I"
+if "%ver%" neq "%ver:Version 5.=%" cls
+if "%ver%" neq "%ver:Version 5.=%" echo Notice
+if "%ver%" neq "%ver:Version 5.=%" echo.
+if "%ver%" neq "%ver:Version 5.=%" echo.
+if "%ver%" neq "%ver:Version 5.=%" echo Hidden Admin Account is inabled by default on Windows XP when in safe Mode
+if "%ver%" neq "%ver:Version 5.=%" echo We will reboot so we can Login to the Admin Account there
+if "%ver%" neq "%ver:Version 5.=%" pause
+if "%ver%" neq "%ver:Version 5.=%" goto Safe Mode networking
 net user administrator /active:yes
 pause
 
