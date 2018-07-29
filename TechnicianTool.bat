@@ -1081,9 +1081,17 @@
 	if exist "%PROGRAMFILES(X86)%\Malwarebytes Anti-Malware\mbam.exe" goto MBAM_Started
 : Install_MBAM
 	echo Installing Malwarebytes Please Wait
+	if /i "%W_V:~0,9%"=="Microsoft" goto MBAM_Legacy
+	if /i "%W_V:~0,9%"=="Windows V" goto MBAM_Legacy
 	if not exist "c:\gos\mbam.exe" echo MBAM is not in the GOS Folder
 	if not exist "c:\gos\mbam.exe" pause & goto GOS_Tools
 	start /wait c:\gos\MBAM.exe /verysilent
+	goto Finding_MBAM
+: MBAM_Legacy
+	if not exist "MBAM_Legacy.exe" echo MBAM is not in the GOS Folder
+	if not exist "MBAM_Legacy.exe" pause & goto GOS_Tools
+	start /wait c:\gos\MBAM_Legacy.exe /verysilent
+	goto Finding_MBAM
 : Finding_MBAM
 	echo.
 	echo Waiting for file to populate
