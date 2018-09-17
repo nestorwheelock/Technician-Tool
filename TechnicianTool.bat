@@ -1134,7 +1134,7 @@
 	echo.
 	if "%Jobs%"=="YES" mode con: cols=50 lines=3
 	if "%Jobs%"=="YES"  echo Next Tool is PatchMyPC
-	if exist "c:\gos\Autoruns.exe" start "" "c:\gos\Autoruns.exe""
+	if exist "c:\gos\Autoruns.exe" start "" "c:\gos\Autoruns.exe"
 	if "%Jobs%"=="No" goto GOS_Tools
 	echo Press Enter to start PatchMyPC
 	pause >nul
