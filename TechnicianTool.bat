@@ -1460,7 +1460,7 @@ REM QUERY EVENTS 3 - QUERY SECURITY LOGS
 	set /P "ANSWER= Press (C) for CRM System Info or (S) for System Info: "  
 	echo You chose: %ANSWER% 
 	if /i "%ANSWER%"=="C" goto System_Info_for_CRM
-	if /i "%ANSWER%"=="N" goto System_Info
+	if /i "%ANSWER%"=="S" goto System_Info
 	call :bad_choice
 	goto Control_Center
 : System_Info
